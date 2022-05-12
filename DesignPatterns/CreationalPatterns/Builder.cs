@@ -17,8 +17,14 @@ namespace DesignPatterns.CreationalPatterns
                 .SetSyrup();
 
             Drink drink = builder.Build();
-
             Console.WriteLine(drink.Description);
+
+            DrinkDirector drinkDirector = new DrinkDirector(builder);
+            drink = drinkDirector.MakeAmericano();
+            Console.WriteLine(drink.Description);
+            drink = drinkDirector.MakeEspresso();
+            Console.WriteLine(drink.Description);
+            Console.WriteLine("------------------------");
 
             Drink drink1 = 
                 new CoffeeBuilder()
@@ -61,6 +67,7 @@ namespace DesignPatterns.CreationalPatterns
         public bool HasChocko { get; set; }    = false;
         public bool HasCinnamon { get; set; }  = false;
         public bool HasIce { get; set; }       = false;
+        public String Feature { get; set; }    = String.Empty;
         public string Description { 
             get
             {
@@ -72,6 +79,8 @@ namespace DesignPatterns.CreationalPatterns
                 if (HasChocko)   sb.Append(" with chockolat");
                 if (HasCinnamon) sb.Append(" with cinnamon");
                 if (HasIce)      sb.Append(" with ice");
+                if (Feature != String.Empty) sb.Append(Feature);
+
                 return sb.ToString();
             } 
         }
@@ -116,6 +125,29 @@ namespace DesignPatterns.CreationalPatterns
     class CocoaBuilder : DrinkBuilder
     {
         public CocoaBuilder() : base(new Cocoa()) { }
+    }
+
+    class DrinkDirector
+    {
+        private readonly DrinkBuilder drinkBuilder;
+        public DrinkDirector(DrinkBuilder drinkBuilder)
+        {
+            this.drinkBuilder = drinkBuilder;
+        }
+
+        public Drink MakeEspresso()
+        {
+            Drink drink = drinkBuilder.Build();
+            drink.Feature = " Espresso";
+            return drink;
+        }
+
+        public Drink MakeAmericano()
+        {
+            Drink drink = drinkBuilder.Build();
+            drink.Feature = " Americano";
+            return drink;
+        }
     }
 }
 /* Строитель (Builder)
