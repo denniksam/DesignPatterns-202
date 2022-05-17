@@ -24,6 +24,7 @@ namespace DesignPatterns
             Console.WriteLine("   21 Strategy");
             Console.WriteLine("   22 Observer");
             Console.WriteLine("   23 State");
+            Console.WriteLine("   24 Chain of Responsibility");
             Console.WriteLine(" 3 Structural:");
             Console.WriteLine("   31 Decorator"); 
             Console.WriteLine("   32 Bridge"); 
@@ -69,11 +70,14 @@ namespace DesignPatterns
                     StrategyDemo.ShowDetails();
                     #endregion
                     break;
+                case "22":
+                    new BehavioralPatterns.ObserverDemo().Show();
+                    break;
                 case "23":
                     new BehavioralPatterns.StateDemo().Show();
                     break;
-                case "22":
-                    new BehavioralPatterns.ObserverDemo().Show();
+                case "24":
+                    new BehavioralPatterns.ChainDemo().Show();
                     break;
                 case "31":
                     #region Decorator
